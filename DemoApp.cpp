@@ -41,13 +41,36 @@ void DemoApp::startDemo()
 
 void DemoApp::setupDemoScene()
 {
-	OgreFramework::getSingletonPtr()->m_pSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox");
+    auto sm = OgreFramework::getSingletonPtr()->m_pSceneMgr;
 
-	OgreFramework::getSingletonPtr()->m_pSceneMgr->createLight("Light")->setPosition(75, 75, 75);
+    auto skyColor = Ogre::ColourValue(60.0f/255,130.0f/255,1.0f);
+    OgreFramework::getSingletonPtr()->m_pViewport->setBackgroundColour(skyColor);
 
-	m_pOgreHeadEntity = OgreFramework::getSingletonPtr()->m_pSceneMgr->createEntity("OgreHeadEntity", "ogrehead.mesh");
-	m_pOgreHeadNode = OgreFramework::getSingletonPtr()->m_pSceneMgr->getRootSceneNode()->createChildSceneNode("OgreHeadNode");
-	m_pOgreHeadNode->attachObject(m_pOgreHeadEntity);
+    sm->createLight("Light")->setPosition(75, 75, 75);
+
+    setupGrid();
+
+    m_pOgreHeadEntity = sm->createEntity("OgreHeadEntity", "ogrehead.mesh");
+    m_pOgreHeadNode = sm->getRootSceneNode()->createChildSceneNode("OgreHeadNode");
+    m_pOgreHeadNode->attachObject(m_pOgreHeadEntity);
+}
+
+void DemoApp::setupGrid()
+{
+    auto sm = OgreFramework::getSingletonPtr()->m_pSceneMgr;
+
+    // Render the bottom grid using lines
+    Ogre::ManualObject *man = sm->createManualObject("grid");
+    man->begin(BASE_MATERIAL, Ogre::RenderOperation::OT_LINE_LIST);
+    for (Ogre::Real i = -GRID_SIZE + GRID_SPACING; i < GRID_SIZE; i += GRID_SPACING) {
+        man->position(i, 0, -GRID_SIZE);
+        man->position(i, 0, GRID_SIZE);
+
+        man->position(-GRID_SIZE, 0, i);
+        man->position(GRID_SIZE, 0, i);
+    }
+    man->end();
+    sm->getRootSceneNode()->attachObject(man);
 }
 
 //|||||||||||||||||||||||||||||||||||||||||||||||

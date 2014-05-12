@@ -3,7 +3,7 @@ TARGET = conemaker2
 
 DEFINES -= UNICODE
 CONFIG -= qt
-#CONFIG += c++11
+CONFIG += c++11
 
 unix {
     # You may need to change this include directory

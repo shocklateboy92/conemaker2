@@ -26,6 +26,7 @@ OgreFramework::OgreFramework()
     m_pSceneMgr			= 0;
     m_pRenderWnd		= 0;
     m_pCamera			= 0;
+    m_pCameraMan		= 0;
     m_pViewport			= 0;
     m_pLog				= 0;
     m_pTimer			= 0;
@@ -68,6 +69,10 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     m_pViewport->setBackgroundColour(ColourValue(0.8f, 0.7f, 0.6f, 1.0f));
 
     m_pCamera->setAspectRatio(Real(m_pViewport->getActualWidth()) / Real(m_pViewport->getActualHeight()));
+
+    // This will handle camera movement for us
+    m_pCameraMan = new OgreBites::SdkCameraMan(m_pCamera);
+    m_pCameraMan->setStyle(OgreBites::CS_ORBIT);
 
     m_pViewport->setCamera(m_pCamera);
 
@@ -191,6 +196,8 @@ bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
         }
     }
 
+    m_pCameraMan->injectKeyDown(keyEventRef);
+
     return true;
 }
 
@@ -198,6 +205,7 @@ bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
 
 bool OgreFramework::keyReleased(const OIS::KeyEvent &keyEventRef)
 {
+    m_pCameraMan->injectKeyUp(keyEventRef);
     return true;
 }
 
@@ -205,8 +213,7 @@ bool OgreFramework::keyReleased(const OIS::KeyEvent &keyEventRef)
 
 bool OgreFramework::mouseMoved(const OIS::MouseEvent &evt)
 {
-    m_pCamera->yaw(Degree(evt.state.X.rel * -0.1f));
-    m_pCamera->pitch(Degree(evt.state.Y.rel * -0.1f));
+    m_pCameraMan->injectMouseMove(evt);
 
     return true;
 }
@@ -215,6 +222,7 @@ bool OgreFramework::mouseMoved(const OIS::MouseEvent &evt)
 
 bool OgreFramework::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
+    m_pCameraMan->injectMouseDown(evt, id);
     return true;
 }
 
@@ -222,6 +230,7 @@ bool OgreFramework::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID 
 
 bool OgreFramework::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
+    m_pCameraMan->injectMouseUp(evt, id);
     return true;
 }
 

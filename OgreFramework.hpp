@@ -24,6 +24,7 @@
 #include <OISMouse.h>
 
 #include <SdkTrays.h>
+#include <SdkCameraMan.h>
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -64,7 +65,8 @@ private:
 	OgreFramework(const OgreFramework&);
 	OgreFramework& operator= (const OgreFramework&);
 
-	OgreBites::SdkTrayManager*	m_pTrayMgr;
+    OgreBites::SdkCameraMan*    m_pCameraMan;
+    OgreBites::SdkTrayManager*	m_pTrayMgr;
     Ogre::FrameEvent            m_FrameEvent;
 	int							m_iNumScreenShots;
 

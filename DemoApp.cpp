@@ -2,6 +2,7 @@
 
 #include "DemoApp.hpp"
 #include "ObjectInserter.h"
+#include "ToolBox.h"
 
 #include <OgreLight.h>
 #include <OgreWindowEventUtilities.h>
@@ -57,7 +58,7 @@ void DemoApp::setupDemoScene()
 
     m_tools = {
         cursor,
-        new CM::ObjectInserter(cursor->getTileNode())
+        new CM::ToolBox({new CM::ObjectInserter(cursor->getTileNode())})
     };
 }
 

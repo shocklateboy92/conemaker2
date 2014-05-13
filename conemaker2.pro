@@ -41,10 +41,13 @@ release {
 HEADERS += \
     OgreFramework.hpp \
     DemoApp.hpp \
-    conemaker.h
+    TileCursor.h \
+    constants.h \
+    Tool.h
 
 SOURCES += \
     OgreFramework.cpp \
     DemoApp.cpp \
     main.cpp \
-    conemaker.cpp
+    TileCursor.cpp \
+    Tool.cpp

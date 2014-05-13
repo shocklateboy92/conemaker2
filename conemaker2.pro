@@ -43,11 +43,13 @@ HEADERS += \
     DemoApp.hpp \
     TileCursor.h \
     constants.h \
-    Tool.h
+    Tool.h \
+    ObjectInserter.h
 
 SOURCES += \
     OgreFramework.cpp \
     DemoApp.cpp \
     main.cpp \
     TileCursor.cpp \
-    Tool.cpp
+    Tool.cpp \
+    ObjectInserter.cpp

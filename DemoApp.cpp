@@ -51,10 +51,6 @@ void DemoApp::setupDemoScene()
 
     setupGrid();
     m_pTool->setup();
-
-    m_pOgreHeadEntity = sm->createEntity("OgreHeadEntity", "ogrehead.mesh");
-    m_pOgreHeadNode = sm->getRootSceneNode()->createChildSceneNode("OgreHeadNode");
-    m_pOgreHeadNode->attachObject(m_pOgreHeadEntity);
 }
 
 void DemoApp::setupGrid()

@@ -50,7 +50,7 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
 
     m_pRoot = new Ogre::Root();
 
-    if(!m_pRoot->showConfigDialog())
+    if(!m_pRoot->restoreConfig() && !m_pRoot->showConfigDialog())
         return false;
     m_pRenderWnd = m_pRoot->initialise(true, wndTitle);
 

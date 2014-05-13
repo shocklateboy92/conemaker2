@@ -1,6 +1,7 @@
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
 #include "DemoApp.hpp"
+#include "Nothing.h"
 #include "ObjectInserter.h"
 #include "ToolBox.h"
 
@@ -58,7 +59,10 @@ void DemoApp::setupDemoScene()
 
     m_tools = {
         cursor,
-        new CM::ToolBox({new CM::ObjectInserter(cursor->getTileNode())})
+        new CM::ToolBox({
+            new CM::Nothing,
+            new CM::ObjectInserter(cursor->getTileNode())
+        })
     };
 }
 

@@ -45,7 +45,8 @@ HEADERS += \
     constants.h \
     Tool.h \
     ObjectInserter.h \
-    ToolBox.h
+    ToolBox.h \
+    Nothing.h
 
 SOURCES += \
     OgreFramework.cpp \
@@ -54,4 +55,5 @@ SOURCES += \
     TileCursor.cpp \
     Tool.cpp \
     ObjectInserter.cpp \
-    ToolBox.cpp
+    ToolBox.cpp \
+    Nothing.cpp

@@ -12,7 +12,7 @@ DemoApp::DemoApp()
 {
 	m_pOgreHeadNode			= 0;
 	m_pOgreHeadEntity		= 0;
-    m_pTool = new CM::TileCursor();
+    m_tools.push_back(new CM::TileCursor);
 }
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
@@ -50,7 +50,9 @@ void DemoApp::setupDemoScene()
     sm->createLight("Light")->setPosition(75, 75, 75);
 
     setupGrid();
-    m_pTool->setup();
+    for (auto t : m_tools) {
+        t->setup();
+    }
 }
 
 void DemoApp::setupGrid()
@@ -118,8 +120,9 @@ void DemoApp::runDemo()
 
 bool DemoApp::keyPressed(const OIS::KeyEvent &keyEventRef)
 {
-    assert (m_pTool);
-//    m_pTool->keyPressed(keyEventRef);
+    for (auto t : m_tools) {
+        t->keyPressed(keyEventRef);
+    }
 
 	OgreFramework::getSingletonPtr()->keyPressed(keyEventRef);
 
@@ -130,7 +133,10 @@ bool DemoApp::keyPressed(const OIS::KeyEvent &keyEventRef)
 
 bool DemoApp::keyReleased(const OIS::KeyEvent &keyEventRef)
 {
-//    m_pTool->keyReleased(keyEventRef);
+    for (auto t : m_tools) {
+        t->keyReleased(keyEventRef);
+    }
+
 	OgreFramework::getSingletonPtr()->keyReleased(keyEventRef);
 	
     return true;
@@ -138,19 +144,25 @@ bool DemoApp::keyReleased(const OIS::KeyEvent &keyEventRef)
 
 bool DemoApp::mouseMoved(const OIS::MouseEvent &arg)
 {
-    m_pTool->mouseMoved(arg);
+    for (auto t : m_tools) {
+        t->mouseMoved(arg);
+    }
     return OgreFramework::getSingletonPtr()->mouseMoved(arg);
 }
 
 bool DemoApp::mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
-    m_pTool->mousePressed(arg, id);
+    for (auto t : m_tools) {
+        t->mousePressed(arg, id);
+    }
     return OgreFramework::getSingletonPtr()->mousePressed(arg, id);
 }
 
 bool DemoApp::mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
-    m_pTool->mouseReleased(arg, id);
+    for (auto t : m_tools) {
+        t->mouseReleased(arg, id);
+    }
     return OgreFramework::getSingletonPtr()->mouseReleased(arg, id);
 }
 

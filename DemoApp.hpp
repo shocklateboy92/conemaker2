@@ -42,7 +42,7 @@ private:
 
 	bool						m_bShutdown;
 
-    CM::Tool*             m_pTool;
+    std::vector<CM::Tool*>      m_tools;
 };
 
 //|||||||||||||||||||||||||||||||||||||||||||||||

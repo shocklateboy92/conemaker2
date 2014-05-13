@@ -6,10 +6,11 @@
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
 #include "OgreFramework.hpp"
+#include "TileCursor.h"
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
-class DemoApp : public OIS::KeyListener
+class DemoApp : public OIS::KeyListener, OIS::MouseListener
 {
 public:
     static const constexpr Ogre::Real GRID_SIZE = 100.0f;
@@ -26,6 +27,9 @@ public:
 	
 	bool keyPressed(const OIS::KeyEvent &keyEventRef);
 	bool keyReleased(const OIS::KeyEvent &keyEventRef);
+    bool mouseMoved(const OIS::MouseEvent &arg);
+    bool mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
+    bool mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
 
 private:
 	void setupDemoScene();
@@ -37,6 +41,8 @@ private:
 	Ogre::Entity*				m_pOgreHeadEntity;
 
 	bool						m_bShutdown;
+
+    CM::Tool*             m_pTool;
 };
 
 //|||||||||||||||||||||||||||||||||||||||||||||||

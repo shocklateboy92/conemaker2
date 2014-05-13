@@ -36,7 +36,7 @@ bool ConeMaker::ToolBox::keyReleased(const OIS::KeyEvent &arg)
 
     // Change after the key has been processsed, so we don't have tools still up
     if (OIS::KC_1 <= arg.key && arg.key < OIS::KC_1 + m_tools.size()) {
-        m_activeTool = m_tools[OIS::KC_1 - arg.key];
+        m_activeTool = m_tools[arg.key - OIS::KC_1];
     }
 
     return result;

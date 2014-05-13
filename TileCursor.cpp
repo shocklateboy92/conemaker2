@@ -27,6 +27,11 @@ void TileCursor::setup()
     m_activeLevel = Ogre::Plane(Ogre::Vector3::UNIT_Y, 0);
 }
 
+Ogre::SceneNode *TileCursor::getTileNode()
+{
+    return m_cursorNode;
+}
+
 bool TileCursor::mouseMoved(const OIS::MouseEvent &arg)
 {
     const OIS::MouseState s = arg.state;

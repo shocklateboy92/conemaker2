@@ -1,6 +1,7 @@
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
 #include "DemoApp.hpp"
+#include "ObjectInserter.h"
 
 #include <OgreLight.h>
 #include <OgreWindowEventUtilities.h>
@@ -12,7 +13,7 @@ DemoApp::DemoApp()
 {
 	m_pOgreHeadNode			= 0;
 	m_pOgreHeadEntity		= 0;
-    m_tools.push_back(new CM::TileCursor);
+
 }
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
@@ -50,9 +51,14 @@ void DemoApp::setupDemoScene()
     sm->createLight("Light")->setPosition(75, 75, 75);
 
     setupGrid();
-    for (auto t : m_tools) {
-        t->setup();
-    }
+
+    CM::TileCursor *cursor = new CM::TileCursor;
+    cursor->setup();
+
+    m_tools = {
+        cursor,
+        new CM::ObjectInserter(cursor->getTileNode())
+    };
 }
 
 void DemoApp::setupGrid()
